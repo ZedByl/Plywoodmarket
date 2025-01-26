@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if ! [ -x "$(command -v docker-compose)" ]; then
+if ! [ -x "$(command -v docker compose)" ]; then
   echo 'Error: docker-compose is not installed.' >&2
   exit 1
 fi
@@ -64,7 +64,7 @@ esac
 # Enable staging mode if needed
 if [ $staging != "0" ]; then staging_arg="--staging"; fi
 
-docker-compose run --rm --entrypoint "\
+docker compose run --rm --entrypoint "\
   certbot certonly --webroot -w /var/www/certbot \
       --preferred-challenges http \
       --email info@plywood.ru \
@@ -75,4 +75,4 @@ docker-compose run --rm --entrypoint "\
 echo
 
 echo "### Reloading nginx ..."
-docker-compose exec nginx nginx -s reload
+docker compose exec nginx nginx -s reload
