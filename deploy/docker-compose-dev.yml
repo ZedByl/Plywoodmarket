@@ -1,0 +1,64 @@
+version: "3.10"
+
+x-node-version: &node-version node:16.15.0
+
+services:
+  db:
+    image: postgres:14.5
+    restart: always
+    container_name: plywood_db
+    ports:
+      - "25432:5432"
+    environment:
+      - POSTGRES_DB=test
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=testik
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - pgsql-sock:/var/run/postgresql
+    networks:
+      - web
+
+  backend:
+    image: *node-version
+    container_name: nestjs
+    ports:
+      - "4200:4200"
+    networks:
+      - web
+    depends_on:
+      - "db"
+    volumes:
+      - ../backend:/api
+      - ../backend/assets:/var/lib/images
+      - pgsql-sock:/var/run/postgresql
+    working_dir: /api
+    command: bash -c "
+      yarn install
+      && yarn prisma migrate dev
+      && yarn prisma db seed
+      && yarn build
+      && yarn start:dev"
+
+  frontend:
+    image: *node-version
+    container_name: nextjs
+    ports:
+      - "3000:3000"
+    networks:
+      - web
+    depends_on:
+      - backend
+    volumes:
+      - ../frontend:/frontend
+    working_dir: /frontend
+    command: bash -c "
+      yarn install
+      && yarn dev"
+
+volumes:
+  pgdata:
+  pgsql-sock:
+
+networks:
+  web:

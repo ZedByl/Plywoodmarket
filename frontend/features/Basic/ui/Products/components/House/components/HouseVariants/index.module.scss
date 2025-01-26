@@ -1,0 +1,43 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.variant {
+  &__title {
+    @include w-container-title;
+    margin: 80px 0;
+
+    @include deviceWidth(tabletPortrait) {
+      margin-top: 70px;
+    }
+    @include deviceWidth(mobile) {
+      margin-top: 60px;
+    }
+  }
+
+  &__container > div {
+    margin: 35px 0 0;
+
+    @include deviceWidth(tabletPortrait) {
+      margin-top: 10px;
+    }
+    @include deviceWidth(mobile) {
+      margin-top: 0;
+    }
+  }
+
+  &__modal {
+    @include m-transition;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    @include m-hover;
+  }
+}

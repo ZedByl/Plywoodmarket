@@ -1,0 +1,49 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.slider {
+  @include m-slider;
+
+  @include deviceWidth(mobile) {
+    margin-bottom: 0;
+  }
+
+  &__card {
+    max-width: 100%;
+
+    &__image {
+      margin-bottom: 20px;
+
+      @include deviceWidth(tabletPortrait) {
+        margin-bottom: 8px;
+      }
+      @include deviceWidth(mobile) {
+        margin-bottom: 8px;
+      }
+
+      & img {
+        border-radius: 24px;
+
+        @include deviceWidth(tabletPortrait) {
+          border-radius: 14px;
+        }
+        @include deviceWidth(mobile) {
+          border-radius: 14px;
+        }
+      }
+    }
+
+    &__description {
+      font-family: MuseoSansCyrl500;
+      font-size: 18px;
+      line-height: 21px;
+    }
+
+    &__step {
+      font-family: MuseoSansCyrl500;
+      font-size: 18px;
+      line-height: 21px;
+      color: $colorPrimary;
+    }
+  }
+}

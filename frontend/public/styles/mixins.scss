@@ -1,0 +1,506 @@
+@import "./variables.scss";
+
+@mixin deviceWidth($size) {
+  @if $size == mobile {
+    @media (min-width: $mobileMin) and (max-width: $mobileMax) {
+      @content;
+    }
+  } @else if $size == tabletPortrait {
+    @media (min-width: $tabletPortraitMin) and (max-width: $tabletPortraitMax) {
+      @content;
+    }
+  } @else if $size == tabletLandscape {
+    @media (min-width: $tabletLandScapeMin) and (max-width: $tabletLandScapeMax) {
+      @content;
+    }
+  } @else if $size == desktopSmall {
+    @media (min-width: $desktopSmallMin) and (max-width: $desktopSmallMax) {
+      @content;
+    }
+  }
+}
+
+@mixin m-height-630 {
+  @media (max-height: 630px) {
+    @content;
+  }
+}
+
+@mixin m-height-550 {
+  @media (max-height: 550px) {
+    @content;
+  }
+}
+
+@mixin m-height-480 {
+  @media (max-height: 480px) {
+    @content;
+  }
+}
+
+@mixin container {
+  &_container {
+    max-width: 1200px;
+    min-width: 320px;
+    margin: 0 auto;
+    padding: 20px 35px;
+  }
+}
+
+@mixin w-layout {
+  margin: 0 auto;
+  max-width: 1240px;
+  min-width: 320px;
+
+  @include deviceWidth(tabletLandscape) {
+    padding: 0 15px;
+  }
+  @include deviceWidth(tabletPortrait) {
+    padding: 0 15px;
+  }
+  @include deviceWidth(mobile) {
+    padding: 0 15px;
+  }
+}
+
+@mixin w-layout-title {
+  @include m-typography(75px, 77px, 700);
+  margin-bottom: 70px;
+  color: $colorPrimary;
+
+  @include deviceWidth(tabletLandscape) {
+    @include m-typography(48px, 49px, 700);
+  }
+  @include deviceWidth(tabletPortrait) {
+    @include m-typography(48px, 49px, 700);
+  }
+  @include deviceWidth(mobile) {
+    @include m-typography(32px, 32px, 700);
+    margin-bottom: 40px;
+  }
+}
+
+@mixin w-container-title {
+  @include m-typography(64px, 100%, 700);
+  margin-bottom: 70px;
+  color: $colorPrimary;
+
+  @include deviceWidth(tabletLandscape) {
+    @include m-typography(36px, 37px, 700);
+    margin-bottom: 40px;
+  }
+  @include deviceWidth(tabletPortrait) {
+    @include m-typography(36px, 37px, 700);
+    margin-bottom: 40px;
+  }
+  @include deviceWidth(mobile) {
+    @include m-typography(32px, 32px, 700);
+    margin-bottom: 42px;
+  }
+}
+
+@mixin m-typography($size: 16px, $lineHeight: 20px, $font: 300) {
+  font-family: MuseoSansCyrl + $font;
+  font-size: $size;
+  line-height: $lineHeight;
+}
+
+@mixin w-container {
+  margin: 0 auto;
+  max-width: 1240px;
+  min-width: 320px;
+}
+
+@mixin m-margin-link-top {
+  &:not(:last-child) {
+    margin-right: 80px;
+  }
+
+  &:first-child {
+    margin-left: 80px;
+  }
+
+  @media (max-width: 1180px) {
+    &:not(:last-child) {
+      margin-right: 52px;
+    }
+
+    &:first-child {
+      margin-left: 52px;
+    }
+  }
+
+  @media (max-width: 1075px) {
+    &:not(:last-child) {
+      margin-right: 40px;
+    }
+
+    &:first-child {
+      margin-left: 40px;
+    }
+  }
+
+  @media (max-width: 995px) {
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    &:first-child {
+      margin-left: 20px;
+    }
+  }
+}
+
+@mixin m-margin-link-bottom {
+  &:not(:last-child) {
+    margin-right: 60px;
+
+    @include deviceWidth(mobile) {
+      margin-right: 0;
+    }
+  }
+
+  &:first-child {
+    margin-left: 60px;
+
+    @include deviceWidth(mobile) {
+      margin-left: 0;
+    }
+  }
+}
+
+@mixin g-flex-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+@mixin m-inline-block {
+  display: inline-block;
+  vertical-align: top;
+}
+
+@mixin m-button {
+  color: $colorOnPrimary;
+  background-color: $colorPrimary;
+  box-sizing: border-box;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  line-height: 18px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+@mixin m-button-close {
+  &__close {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: opacity ease 0.5s;
+
+    &:after,
+    &:before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      display: block;
+      width: 24px;
+      height: 3px;
+      background: #000;
+    }
+
+    &:after {
+      transform: rotate(-45deg);
+    }
+
+    &:before {
+      transform: rotate(45deg);
+    }
+  }
+}
+
+@mixin m-button-wrap {
+  border-radius: 10px;
+  color: $colorOnPrimary;
+  background-color: $colorPrimary;
+  cursor: pointer;
+}
+
+@mixin m-form-modal {
+  .form {
+    box-sizing: border-box;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15%);
+    background: $colorOnPrimary;
+    max-width: 850px;
+    max-height: 850px;
+    width: 375px;
+    overflow: auto;
+
+    @include deviceWidth(mobile) {
+      max-height: none;
+      border-radius: 0;
+      height: 100vh;
+    }
+
+    &__title {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 28px;
+      margin-bottom: 16px;
+    }
+
+    &__button {
+      @include m-button;
+    }
+
+    @include m-button-close;
+  }
+
+  // only for hovers
+  @media (hover: hover) and (pointer: fine) {
+    .form {
+      &__button:hover {
+        opacity: $opacityHover;
+      }
+    }
+  }
+}
+
+@mixin m-offer-card {
+  display: flex;
+
+  @include deviceWidth(mobile) {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__left {
+    @include m-typography(20px, 28px, 300);
+    color: $colorOnPrimary;
+    padding: 76px 48px 76px 60px;
+    border-radius: 26px 0 0 26px;
+    background-color: $colorPrimary;
+    width: 50%;
+
+    @include deviceWidth(tabletPortrait) {
+      @include m-typography(14px, 20px, 300);
+      padding: 24px 27px;
+    }
+    @include deviceWidth(mobile) {
+      @include m-typography(14px, 20px, 300);
+      padding: 24px 24px 125px;
+      border-radius: 15px;
+      width: 100%;
+    }
+
+
+    & a {
+      color: $colorOnPrimary;
+      border-bottom: 1px solid $colorOnPrimary;
+    }
+
+    & b {
+      @include m-typography(20px, 28px, 500);
+
+      @include deviceWidth(tabletPortrait) {
+        @include m-typography(14px, 20px, 300);
+      }
+      @include deviceWidth(mobile) {
+        @include m-typography(14px, 20px, 300);
+      }
+    }
+  }
+
+  &__right {
+    position: relative;
+    width: 50%;
+    border-radius: 0 26px 26px 0;
+    background-color: $colorPrimary;
+
+    @include deviceWidth(mobile) {
+      top: -105px;
+      width: 90%;
+      height: 180px;
+      border-radius: 15px;
+      background-color: $colorSecondary;
+    }
+
+    & img {
+      border-radius: 0 26px 26px 0;
+      object-fit: cover;
+
+      @include deviceWidth(mobile) {
+        border-radius: 15px;
+      }
+    }
+  }
+}
+
+@mixin m-card-cabinet {
+  &__title {
+    @include w-container-title();
+    margin-bottom: 82px;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 70px;
+
+    @include deviceWidth(tabletPortrait) {
+      margin-bottom: 40px;
+    }
+    @include deviceWidth(mobile) {
+      flex-direction: column;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__left {
+    @include m-typography(20px, 28px);
+    margin-right: 20px;
+    width: 50%;
+
+    @include deviceWidth(tabletPortrait) {
+      @include m-typography(14px, 14px);
+    }
+    @include deviceWidth(mobile) {
+      @include m-typography(14px, 14px);
+      margin: 0 0 20px;
+      width: 100%;
+    }
+
+    & b {
+      @include m-typography(20px, 28px);
+      color: $colorPrimary;
+
+      @include deviceWidth(tabletPortrait) {
+        @include m-typography(14px, 14px);
+      }
+      @include deviceWidth(mobile) {
+        @include m-typography(14px, 14px);
+      }
+    }
+  }
+
+  &__right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+
+    @include deviceWidth(tabletPortrait) {
+      gap: 10px;
+    }
+    @include deviceWidth(mobile) {
+      gap: 10px;
+    }
+
+    &__item {
+      @include deviceWidth(tabletPortrait) {
+        width: 143px;
+      }
+      @include deviceWidth(mobile) {
+        width: 100%;
+      }
+
+      & img {
+        border-radius: 12px;
+      }
+    }
+  }
+}
+
+@mixin m-transition {
+  transition: .300s;
+}
+
+@mixin m-hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      opacity: $opacityHover;
+      cursor: pointer;
+      @include m-transition;
+    }
+  }
+}
+
+@mixin m-slider {
+  margin-bottom: 100px;
+
+  @include deviceWidth(tabletLandscape) {
+    margin-bottom: 75px;
+  }
+  @include deviceWidth(tabletPortrait) {
+    margin-bottom: 75px;
+  }
+  @include deviceWidth(mobile) {
+    margin-bottom: 45px;
+  }
+
+  &__slide {
+    max-height: 670px;
+
+    &__first {
+      & img {
+        object-position: 50% 100%;
+      }
+    }
+
+    img {
+      object-fit: cover;
+      border-radius: 30px;
+
+      @include deviceWidth(mobile) {
+        border-radius: 15px;
+      }
+    }
+
+    &__noCover {
+      background: $colorOnPrimary;
+      border-radius: 30px;
+
+      @include deviceWidth(mobile) {
+        border-radius: 15px;
+      }
+
+      & img {
+        object-fit: contain;
+      }
+    }
+  }
+
+  &__pagination {
+    position: unset;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    transition: 300ms opacity;
+    margin-top: 10px;
+
+    &__bullet {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: rgba($colorPrimary, .4);
+
+      &:not(:last-child) {
+        margin-right: 4px;
+      }
+
+      &Active {
+        background-color: rgba($colorPrimary, 1);
+      }
+    }
+  }
+}

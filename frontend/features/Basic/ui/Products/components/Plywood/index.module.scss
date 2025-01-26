@@ -1,0 +1,24 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.plywood {
+  &__title {
+    @include w-container-title;
+  }
+
+  &__service {
+    &_desktop {
+      @include deviceWidth(mobile) {
+        display: none;
+      }
+    }
+
+    &_mobile {
+      display: none;
+
+      @include deviceWidth(mobile) {
+        display: block;
+      }
+    }
+  }
+}

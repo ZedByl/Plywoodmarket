@@ -1,0 +1,32 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.links {
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  height: 65px;
+  padding-top: 12px;
+  overflow-y: unset;
+
+  &__item {
+    @include m-typography(16px, 22px, 500);
+    display: inline;
+    line-height: 140%;
+    padding: 9px 16px 10px;
+    color: #636161;
+    background-color: $colorSecondary;
+    border: 2px solid $colorPrimary;
+    border-radius: 25px;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+
+    &Active {
+      color: $colorOnPrimary;
+      background-color: $colorPrimary;
+    }
+  }
+}

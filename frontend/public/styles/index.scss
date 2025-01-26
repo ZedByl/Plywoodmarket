@@ -1,0 +1,78 @@
+@import "~@csstools/normalize.css";
+@import "variables";
+@import "mixins";
+@import "fonts";
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: 'MuseoSansCyrl300';
+}
+
+#__next {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+  background-color: $colorSecondary;
+}
+
+button {
+    border: 0;
+    outline: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+
+    &:hover {
+        opacity: $opacityHover;
+    }
+}
+
+.disable {
+    opacity: $opacityHover;
+}
+
+.form {
+    padding-top: 16px;
+}
+
+.button {
+    @include m-button;
+    margin-top: 16px;
+
+    &Edit {
+        background-color: #ff7010;
+    }
+
+    &Remove {
+        background-color: #e23535;
+    }
+
+    &:not(:last-child) {
+        margin-right: 16px;
+    }
+}
+
+.g_lockscroll {
+    overflow: hidden;
+}

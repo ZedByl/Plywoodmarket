@@ -1,0 +1,84 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.production {
+  margin-top: 100px;
+
+  @include deviceWidth(tabletPortrait) {
+    margin-top: 70px;
+  }
+  @include deviceWidth(mobile) {
+    margin-top: 60px;
+  }
+
+  &__title {
+    @include w-container-title;
+  }
+
+  &__container {
+    &_desktop {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 30px 20px;
+
+      @include deviceWidth(mobile) {
+        display: none;
+      }
+
+      & img {
+        border-radius: 24px;
+
+        @include deviceWidth(tabletPortrait) {
+          border-radius: 14px;
+        }
+        @include deviceWidth(mobile) {
+          border-radius: 14px;
+        }
+      }
+    }
+
+    &_mobile {
+      display: none;
+
+      @include deviceWidth(mobile) {
+        display: block;
+      }
+    }
+  }
+
+  &__text {
+    @include m-typography(20px, 28px);
+    margin: auto;
+
+    @include deviceWidth(tabletPortrait) {
+      @include m-typography(14px, 20px);
+    }
+    @include deviceWidth(mobile) {
+      @include m-typography(14px, 20px);
+      margin-bottom: 20px;
+    }
+
+    & b {
+      @include m-typography(20px, 28px);
+      color: $colorPrimary;
+
+      @include deviceWidth(tabletPortrait) {
+        @include m-typography(14px, 20px);
+      }
+      @include deviceWidth(mobile) {
+        @include m-typography(14px, 20px);
+      }
+    }
+  }
+
+  &__img {
+    @include deviceWidth(mobile) {
+      display: none;
+    }
+
+    & img {
+      border-radius: 14px;
+    }
+  }
+}

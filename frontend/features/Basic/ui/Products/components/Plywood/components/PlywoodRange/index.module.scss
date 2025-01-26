@@ -1,0 +1,17 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.range {
+    margin-bottom: 100px;
+
+    @include deviceWidth(tabletPortrait) {
+        margin-bottom: 53px;
+    }
+    @include deviceWidth(mobile) {
+        margin-bottom: 50px;
+    }
+
+    &__title {
+        @include w-container-title;
+    }
+}

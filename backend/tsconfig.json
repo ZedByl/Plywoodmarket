@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "src",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@authorization/*": ["authorization/*"],
+      "@config/*": ["common/config/*"],
+      "@consts/*": ["common/consts/*"],
+      "@error/*": ["common/error/*"],
+      "@files/*": ["common/files/*"],
+      "@utils/*": ["common/utils/*"],
+      "@prisma-service/*": ["database/prisma/*"],
+      "@email/*": ["email/*"],
+      "@category/*": ["entities/category/*"],
+      "@plywood/*": ["entities/plywood-entities/*"],
+      "@furniture/*": ["entities/furniture-entities/*"],
+      "@order/*": ["entities/order/*"],
+      "@role/*": ["entities/role/*"],
+      "@user/*": ["entities/user/*"],
+      "@common-types/*": ["types/*"]
+    }
+  }
+}

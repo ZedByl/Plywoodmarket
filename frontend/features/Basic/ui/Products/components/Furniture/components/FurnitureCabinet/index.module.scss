@@ -1,0 +1,6 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.cabinet {
+    @include m-card-cabinet;
+}

@@ -1,0 +1,49 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.basket {
+  &__title {
+    @include m-typography(48px, 48px, 700);
+    color: $colorPrimary;
+    margin-bottom: 50px;
+
+    @include deviceWidth(tabletPortrait) {
+      @include m-typography(32px, 32px, 700);
+      margin-bottom: 50px;
+    }
+    @include deviceWidth(mobile) {
+      @include m-typography(28px, 28px, 700);
+      margin-bottom: 40px;
+    }
+  }
+
+  &__low {
+    text-align: center;
+  }
+
+  &__description {
+    @include m-typography(22px, 24px, 300);
+    padding-bottom: 57px;
+
+    @include deviceWidth(tabletPortrait) {
+      @include m-typography(18px, 20px, 300);
+      padding-bottom: 39px;
+    }
+    @include deviceWidth(mobile) {
+      @include m-typography(16px, 18px, 300);
+      padding-bottom: 33px;
+    }
+  }
+
+  &__button {
+    @include m-typography(16px, 20px, 500);
+    @include m-hover;
+    max-height: 52px;
+    background-color: $colorPrimary;
+    border-radius: 10px;
+    color: $colorOnPrimary;
+    padding: 17px;
+    width: 100%;
+    max-width: 300px;
+  }
+}

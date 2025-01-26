@@ -1,0 +1,69 @@
+html
+    head
+        style
+            include style.css
+
+h1 #{typeMail}
+
+block content
+  - var prods = products
+  - var msg = message
+  - var mail = email
+    h2 Пользователь:
+    p Телефон: #{phone}
+    p ФИО: #{fio}
+
+    if mail
+        p Email: #{mail}
+
+    if msg
+        p Сообщение: #{msg}
+
+    if prods.plywood
+        h2 Фанера:
+        table
+            thead
+                tr
+                    th Название
+                    th Цена
+                    th Количество
+                    th Цвет
+                    th HEX код
+                    th Формат
+                    th Толщина
+                    th Сорт
+
+                for item in prods.plywood
+                    tbody
+                        tr
+                            td= item.name
+                            td= item.price
+                            td= item.count
+                            td(style={ background: item.color })= ' '
+                            td= item.color
+                            td= item.format
+                            td= item.widthPlywood
+                            td= item.sort
+
+    if prods.furniture
+        h2 Мебель:
+        table
+            thead
+                tr
+                    th Название
+                    th Цена
+                    th Количество
+                    th Ширина
+                    th Высота
+                    th Глубина
+
+                for item in prods.furniture
+                    - var price = item.price || 0
+                    tbody
+                        tr
+                            td= item.name
+                            td= price
+                            td= item.count
+                            td= item.width
+                            td= item.height
+                            td= item.depth

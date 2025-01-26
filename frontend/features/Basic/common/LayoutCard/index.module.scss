@@ -1,0 +1,35 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.layoutCard {
+  padding: 45px 0 70px;
+
+  @include deviceWidth(tabletPortrait) {
+    padding: 30px 0 50px;
+  }
+  @include deviceWidth(mobile) {
+    padding: 20px 0 67px;
+  }
+
+  &__inner {
+    @include w-layout;
+    flex: 1 0 auto;
+  }
+
+  &__close {
+    @include m-hover;
+
+    &_block {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 70px;
+
+      @include deviceWidth(tabletPortrait) {
+        margin: 0 15px 30px 0;
+      }
+      @include deviceWidth(mobile) {
+        margin: 0 0 34px 0;
+      }
+    }
+  }
+}

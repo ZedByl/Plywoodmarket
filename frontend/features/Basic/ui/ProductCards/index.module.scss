@@ -1,0 +1,91 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.productCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px 20px;
+
+  @include deviceWidth(tabletLandscape) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @include deviceWidth(tabletPortrait) {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 20px;
+  }
+  @include deviceWidth(mobile) {
+    grid-template-columns: 1fr;
+    gap: 20px 20px;
+  }
+
+  &__item {
+    cursor: pointer;
+
+    &:hover {
+      opacity: $opacityHover;
+    }
+
+    &__image {
+      max-width: 400px;
+      margin-bottom: 15px;
+      width: 100%;
+      position: relative;
+
+      @include deviceWidth(mobile) {
+        max-width: 100%;
+      }
+
+      & img {
+        border-radius: 24px;
+        object-fit: cover;
+      }
+    }
+
+    &__title {
+      @include m-typography(18px, 21px, 700);
+      margin-bottom: 10px;
+    }
+
+    &__colors {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    &__color {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      border: 1px solid rgba($colorBlack, 0.37);
+
+      &:not(:last-child) {
+        margin-right: 4px;
+      }
+    }
+
+    &__bottom {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__price {
+      @include m-typography(20px, 23px, 700);
+
+      & b {
+        @include m-typography(20px, 23px, 900);
+        color: $colorPrimary;
+      }
+    }
+
+    &__availability {
+      @include m-typography(20px, 23px, 700);
+
+      &No {
+        color: #8D8D8D;
+      }
+
+      & b {
+        color: $colorPrimary;
+      }
+    }
+  }
+}

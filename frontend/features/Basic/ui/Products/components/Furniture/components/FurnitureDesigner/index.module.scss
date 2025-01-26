@@ -1,0 +1,68 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.designer {
+  margin-top: 100px;
+
+  @include deviceWidth(tabletPortrait) {
+    margin-top: 70px;
+  }
+  @include deviceWidth(mobile) {
+    margin-top: -65px
+  }
+
+  &__title {
+    @include w-container-title;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 70px 0;
+
+    @include deviceWidth(mobile) {
+      flex-direction: column;
+      margin: 0 0 40px;
+    }
+  }
+
+  &__left {
+    margin-right: 20px;
+
+    @include deviceWidth(mobile) {
+      margin: 60px 0 20px;
+    }
+
+    & img {
+      border-radius: 15px;
+    }
+  }
+
+  &__right {
+    @include m-typography(20px, 28px);
+    margin-right: 20px;
+    width: 50%;
+
+    @include deviceWidth(tabletPortrait) {
+      @include m-typography(14px, 20px);
+    }
+    @include deviceWidth(mobile) {
+      @include m-typography(14px, 20px);
+      margin: 0;
+      width: 100%;
+    }
+
+    & b {
+      @include m-typography(20px, 28px);
+      color: $colorPrimary;
+
+      @include deviceWidth(tabletPortrait) {
+        @include m-typography(14px, 20px);
+      }
+      @include deviceWidth(mobile) {
+        @include m-typography(14px, 20px);
+      }
+    }
+  }
+}

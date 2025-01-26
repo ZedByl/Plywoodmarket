@@ -1,0 +1,302 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Available {
+  AVAILABLE
+  NOT_AVAILABLE
+  ORDER
+}
+
+model Category {
+  id                String      @id @default(uuid())
+  name              String      @unique
+  article           String      @unique
+  plywoodProducts   Plywood[]
+  furnitureProducts Furniture[]
+  houseProducts     House[]
+  createdAt         DateTime    @default(now()) @map("created_at")
+  updatedAt         DateTime?   @map("updated_at")
+  deleted           DateTime?
+
+  @@map("category")
+}
+
+/////////////////////////////////////////////////////////////
+//////////////////  USER  //////////////////////////////////
+///////////////////////////////////////////////////////////
+
+model User {
+  id        String      @id @default(uuid())
+  email     String      @unique
+  password  String
+  tokens    UserToken[]
+  roles     Role[]
+  createdAt DateTime    @default(now()) @map("created_at")
+  updatedAt DateTime?   @map("updated_at")
+  deleted   DateTime?
+
+  @@map("user")
+}
+
+model UserToken {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String   @map("user_id")
+  token     String   @unique
+  expireIn  DateTime @map("expire_in")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("user_token")
+}
+
+model Role {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  users     User[]
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+
+  @@map("role")
+}
+
+model Config {
+  id            String    @id @default(uuid())
+  emailUser     String    @map("email_user")
+  emailPassword String    @map("email_password")
+  emailHost     String    @map("email_host")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime? @map("updated_at")
+
+  @@map("config")
+}
+
+model Order {
+  id         String      @id @default(uuid())
+  plywoods   Plywood[]
+  houses     House[]
+  furnitures Furniture[]
+  email      String
+  phone      String
+  fio        String
+  price      Int
+  createdAt  DateTime    @default(now()) @map("created_at")
+  updatedAt  DateTime?   @map("updated_at")
+
+  @@map("order")
+}
+
+/////////////////////////////////////////////////////////////
+//////////////////  PLYWOOD  ///////////////////////////////
+///////////////////////////////////////////////////////////
+
+model Plywood {
+  id             String                  @id @default(uuid())
+  name           String
+  article        String                  @unique
+  photos         PlywoodPhotos[]
+  category       Category                @relation(fields: [categoryId], references: [id])
+  categoryId     String                  @map("category_id")
+  orders         Order[]
+  formats        PlywoodFormat[]
+  surfaceTypes   PlywoodSurfaceType[]
+  types          PlywoodType[]
+  sorts          PlywoodSort[]
+  coatingDensity PlywoodCoatingDensity[]
+  features       PlywoodFeature[]
+  widths         PlywoodWidth[]
+  available      Available               @default(AVAILABLE)
+  position       Int                     @default(1)
+  price          Int
+  description    String
+  createdAt      DateTime                @default(now()) @map("created_at")
+  updatedAt      DateTime?               @map("updated_at")
+  deleted        DateTime?
+
+  @@map("plywood")
+}
+
+model PlywoodFeature {
+  id          String    @id @default(uuid())
+  plywoods    Plywood[]
+  name        String    @unique
+  description String?
+  value       String?
+  price       Int
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime? @map("updated_at")
+
+  @@map("plywood_feature")
+}
+
+model PlywoodFormat {
+  id        String    @id @default(uuid())
+  plywoods  Plywood[]
+  name      String
+  price     Int
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+
+  @@map("plywood_format")
+}
+
+model PlywoodSurfaceType {
+  id        String    @id @default(uuid())
+  plywood   Plywood[]
+  name      String    @unique
+  price     Int
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+
+  @@map("plywood_surface_type")
+}
+
+model PlywoodWidth {
+  id        String    @id @default(uuid())
+  plywood   Plywood[]
+  name      String
+  price     Int
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+
+  @@map("plywood_width")
+}
+
+model PlywoodType {
+  id        String    @id @default(uuid())
+  plywood   Plywood[]
+  name      String    @unique
+  price     Int
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+
+  @@map("plywood_type")
+}
+
+model PlywoodSort {
+  id        String    @id @default(uuid())
+  plywood   Plywood[]
+  name      String
+  price     Int
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+
+  @@map("plywood_sort")
+}
+
+model PlywoodCoatingDensity {
+  id        String    @id @default(uuid())
+  plywood   Plywood[]
+  name      String
+  price     Int
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+
+  @@map("plywood_coating_density")
+}
+
+model PlywoodPhotos {
+  id          String    @id @default(uuid())
+  plywood     Plywood[]
+  name        String    @unique
+  photos      Json
+  color       String
+  description String?
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime? @map("updated_at")
+
+  @@map("plywood_photos")
+}
+
+/////////////////////////////////////////////////////////////
+//////////////////  FURNITURE  /////////////////////////////
+///////////////////////////////////////////////////////////
+
+model Furniture {
+  id          String             @id @default(uuid())
+  name        String
+  article     String             @unique
+  photos      FurniturePhotos[]
+  orders      Order[]
+  category    Category           @relation(fields: [categoryId], references: [id])
+  categoryId  String             @map("category_id")
+  available   Available          @default(AVAILABLE)
+  price       Int?
+  description String?
+  height      Float?
+  width       Float?
+  depth       Float?
+  position    Int                @default(1)
+  features    FurnitureFeature[]
+  parameters  FurnitureParams[]
+  createdAt   DateTime           @default(now()) @map("created_at")
+  updatedAt   DateTime?          @map("updated_at")
+  deleted     DateTime?
+
+  @@map("furniture")
+}
+
+model FurnitureFeature {
+  id          String      @id @default(uuid())
+  furniture   Furniture[]
+  name        String      @unique
+  description String?
+  value       String?
+  price       Int
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime?   @map("updated_at")
+
+  @@map("furniture_feature")
+}
+
+model FurnitureParams {
+  id          String      @id @default(uuid())
+  furniture   Furniture[]
+  name        String      @unique
+  description String?
+  value       String?
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime?   @map("updated_at")
+
+  @@map("furniture_params")
+}
+
+model FurniturePhotos {
+  id          String      @id @default(uuid())
+  furniture   Furniture[]
+  name        String      @unique
+  photos      Json
+  color       String
+  description String?
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime?   @map("updated_at")
+
+  @@map("furniture_photos")
+}
+
+/////////////////////////////////////////////////////////////
+//////////////////  HOUSE  /////////////////////////////////
+///////////////////////////////////////////////////////////
+
+model House {
+  id         String    @id @default(uuid())
+  name       String
+  article    String    @unique
+  photos     Json?
+  orders     Order[]
+  category   Category  @relation(fields: [categoryId], references: [id])
+  categoryId String    @map("category_id")
+  price      Int
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime? @map("updated_at")
+  deleted    DateTime?
+
+  @@map("house")
+}
