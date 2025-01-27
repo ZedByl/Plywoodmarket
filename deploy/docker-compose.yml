@@ -6,7 +6,7 @@ services:
     container_name: db
     restart: always
     environment:
-      - POSTGRES_DB=prod
+      - POSTGRES_DB=test
       - POSTGRES_USER=test
       - POSTGRES_PASSWORD=testik
     ports:
