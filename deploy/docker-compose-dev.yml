@@ -64,7 +64,7 @@ services:
       - db
     restart: always
     ports:
-      - "443:80"
+      - "80:80"
     networks:
       - web
     volumes:
