@@ -50,6 +50,10 @@ services:
 
   nginx:
     build: nginx
+    depends_on:
+      - frontend
+      - backend
+      - db
     ports:
       - "80:80"
       - "443:443"
