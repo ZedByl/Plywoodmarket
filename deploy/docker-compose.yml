@@ -31,9 +31,8 @@ services:
     working_dir: /api
     command: bash -c "
       yarn install
-      && yarn prisma migrate deploy
-      && yarn prisma db seed
-      && yarn start:dev"
+      && yarn build
+      && yarn start:prod"
 
   frontend:
     image: node:16.15.0
