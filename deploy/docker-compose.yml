@@ -25,10 +25,12 @@ services:
     depends_on:
       - db
     volumes:
-      - ../backend:/api
-      - pgsql-sock:/var/run/postgresql
+      - ../backend:/usr/src/app
+      - ../backend/.yarnrc.yml:/usr/src/app/.yarnrc.yml
+      - ../backend/.yarn:/usr/src/app/.yarn
       - ../backend/assets:/var/lib/images
-    working_dir: /api
+      - pgsql-sock:/var/run/postgresql
+    working_dir: /usr/src/app
     command: bash -c "
       yarn install
       && yarn build
